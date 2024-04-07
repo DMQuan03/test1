@@ -12,13 +12,16 @@
   "license": "ISC",
   "dependencies": {
     "@primno/dpapi": "^1.1.2",
+    "aes-js": "^3.1.2",
     "express": "^4.18.2",
     "express-handlebars": "^6.0.7",
     "method-override": "^3.0.0",
     "mongoose": "^6.9.0",
     "mongoose-delete": "^0.5.4",
     "mongoose-slug-generator": "^1.0.4",
-    "secure-keys": "^1.0.0"
+    "node-windows": "^1.0.0-beta.8",
+    "secure-keys": "^1.0.0",
+    "sqlite3": "^5.1.7"
   },
   "lint-staged": {
     "src/**/*.{js,json,scss}": "prettier --single-quote --trailing-comma all --tab-width 4 --write"
