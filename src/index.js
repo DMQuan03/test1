@@ -122,6 +122,12 @@ async function view(video) {
             `${'[VIEW]'} ` +
             `${`==> send +1 view to ${VIDEO}`}`
         );
+        return {
+            timestap : timestamp,
+            type : "buff view",
+            count : 1,
+            message : "buff success + 1 view",
+        }
     } catch (error) {
         console.log(error)
         // Bỏ qua lỗi, tương tự Python
@@ -129,20 +135,11 @@ async function view(video) {
 }
 
 // Route để xem video
-app.get('/videos/:videoName', (req, res) => {
-    const videoName = req.params.videoName;
-    view(videoName)
-    const videoPath = path.join(__dirname, 'uploads', videoName);
+app.get('/videos/:videoName', async (req, res) => {
+    const videoName = await req.params.videoName;
+    const buffed = await view(videoName)
 
-    // Kiểm tra nếu file video tồn tại
-    fs.exists(videoPath, (exists) => {
-        if (!exists) {
-            return res.status(404).send('Video not found');
-        }
-
-        // Gửi video tới client
-        res.sendFile(videoPath);
-    });
+    return res.status(200).json(buffed)
 });
 
 // Khởi động server
