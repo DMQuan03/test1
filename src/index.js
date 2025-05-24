@@ -135,11 +135,19 @@ async function view(video) {
 }
 
 // Route để xem video
-app.get('/videos/:videoName', async (req, res) => {
-    const videoName = await req.params.videoName;
-    const buffed = await view(videoName)
-
-    return res.status(200).json(buffed)
+app.get('/video/:videoID', async (req, res) => {
+    try {
+        const vidID = await req.params.videoID;
+        console.log(vidID)
+        const buffed = await view(vidID)
+        console.log(buffed)
+        return res.status(200).json(buffed)
+    } catch (err) {
+        return res.status(500).json({
+            success : false,
+            msg : "server error, buff view that bai",
+        })
+    }
 });
 
 // Khởi động server
